@@ -63,7 +63,7 @@ const handleBooking = (state, action) => {
   //     })
   //   })
   // })
-  if (state.registerInfo.numberOfSeat < state.selectingSeatList.length) {
+  if (Number(state.registerInfo.numberOfSeat) < (state.selectingSeatList.length + state.selectedSeatList.length)) {
     alert("Số ghế bạn đặt vượt quá số ghế bạn đã đăng ký")
     return;
   }
