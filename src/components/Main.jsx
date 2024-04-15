@@ -6,6 +6,7 @@ import BookInput from './BookInput'
 import { connect } from 'react-redux'
 import { actionBookSeat } from '../stores/action'
 
+import moviescreen from "../assets/screen-thumb.png"
 class Main extends Component {
 
   handleConfirmBooking = () => {
@@ -19,7 +20,7 @@ class Main extends Component {
           <BookInput />
           <div className='container'>
             <div className="movie-screen">
-              <img src="screen-thumb.png" alt="screen" />
+              <img src={moviescreen} alt="screen" />
             </div>
             <SeatMatrix ref={this.seatMatrixRef}/>
             <SeatStatusDesc />

@@ -31,6 +31,9 @@ const seatReducer = (state = initialState, action) => {
     case ActionType.RESET:
       handleReset(state, action)
       return { ...state }
+    case ActionType.PLACE_ORDER:
+      handlePlaceOrder(state, action)
+      return { ...state }
     default:
       return { ...state }
   }
@@ -60,7 +63,10 @@ const handleBooking = (state, action) => {
   //     })
   //   })
   // })
-
+  if (state.registerInfo.numberOfSeat < state.selectingSeatList.length) {
+    alert("Số ghế bạn đặt vượt quá số ghế bạn đã đăng ký")
+    return;
+  }
   const newSeatList = state.seatList.map((seatRow) => {
     const newDanhSachGhe = seatRow.danhSachGhe.map((seatInRow) => {
       if (state.selectingSeatList.find((seat) => seat.soGhe === seatInRow.soGhe)) {
@@ -70,7 +76,7 @@ const handleBooking = (state, action) => {
     });
     return { ...seatRow, danhSachGhe: newDanhSachGhe };
   });
-  state.selectedSeatList = [...state.selectedSeatList,...state.selectingSeatList]
+  state.selectedSeatList = [...state.selectedSeatList, ...state.selectingSeatList]
   state.selectingSeatList = []
   state.seatList = newSeatList
 }
@@ -86,7 +92,7 @@ const handleReset = (state) => {
 }
 
 const handleCancel = (state, action) => {
-  const newSelectedSeatList = state.selectedSeatList.filter((seat) => seat.soGhe!== action.payload.soGhe)
+  const newSelectedSeatList = state.selectedSeatList.filter((seat) => seat.soGhe !== action.payload.soGhe)
   state.selectedSeatList = newSelectedSeatList
   const newSeatList = state.seatList.map((seatRow) => {
     const newDanhSachGhe = seatRow.danhSachGhe.map((seatInRow) => {
@@ -99,6 +105,15 @@ const handleCancel = (state, action) => {
   });
   state.seatList = newSeatList
 }
+
+const handlePlaceOrder = (state, action) => {
+  if (Number(state.registerInfo.numberOfSeat) !== state.selectedSeatList.length) {
+    alert("Vui lòng đặt đủ số ghế mà bạn đăng ký");
+    return;
+  }
+  alert("Đặt ghế thành công");
+  window.location.reload();
+};
 
 
 export default seatReducer

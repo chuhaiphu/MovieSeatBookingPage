@@ -1,11 +1,11 @@
 import * as ActionType from "../utils/constant"
 
-export const actionRegister = (name, number) => {
+export const actionRegister = (name, numberOfSeat) => {
   return {
     type: ActionType.REGISTER,
     payload: {
       name,
-      number
+      numberOfSeat
     }
   }
 }
@@ -35,5 +35,11 @@ export const actionCancelSeat = (seat) => {
   return {
     type: ActionType.CANCEL_SEAT,
     payload: seat
+  }
+}
+
+export const actionPlaceOrder = () => {
+  return {
+    type: ActionType.PLACE_ORDER
   }
 }

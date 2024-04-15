@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { actionCancelSeat } from '../stores/action'
+import { actionCancelSeat, actionPlaceOrder } from '../stores/action'
 
 class BookResult extends Component {
   renderBookingResult = () => {
@@ -17,6 +17,10 @@ class BookResult extends Component {
         )
       })
     )
+  }
+
+  handlePlaceOrder = () => {
+    this.props.actionPlaceOrder()
   }
 
   renderTotalPriceOfBookingResult = () => {
@@ -54,7 +58,7 @@ class BookResult extends Component {
             </tbody>
           </table>
 
-          <button className='place-order-button' onClick={this.props.onBookSeat}>PLACE ORDER</button>
+          <button className='place-order-button' onClick={this.handlePlaceOrder}>PLACE ORDER</button>
         </>
       )
     )
@@ -72,6 +76,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     actionCancelSeat: (seat) => {
       dispatch(actionCancelSeat(seat))
+    },
+    actionPlaceOrder: () => {
+      dispatch(actionPlaceOrder())
     }
   }
 }
